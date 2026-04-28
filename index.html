@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desk-Based Soil Assessments — Soil Benchmark</title>
+
+  <!-- Reveal.js from CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/black.min.css" id="theme">
+
+  <!-- Inter from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       COLOUR PALETTE
+       ============================================ */
+    :root {
+      --dark-bg:       #002c15;
+      --mid-bg:        #2C3521;
+      --pixel-green:   #5EBF3E;
+      --pixel-yellow:  #F2D249;
+      --pixel-orange:  #E08C3A;
+      --pixel-pink:    #C46A4A;
+      --pixel-cyan:    #6BB5A0;
+      --pixel-red:     #B5432B;
+      --white:         #FFF8E7;
+      --muted-sage:    #8A8462;
+
+      --title-font: 'Inter', 'Segoe UI', Arial, sans-serif;
+      --body-font:  'Inter', 'Segoe UI', Arial, sans-serif;
+    }
+
+    /* ============================================
+       GLOBAL / REVEAL OVERRIDES
+       ============================================ */
+    .reveal-viewport { background: var(--dark-bg); }
+
+    .reveal { font-family: var(--body-font); color: var(--white); }
+
+    .reveal { font-size: 22px; }
+
+    .reveal .slides section {
+      text-align: left;
+      padding: 28px 50px;
+      box-sizing: border-box;
+      height: 100%;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: var(--title-font);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.4em;
+    }
+
+    .reveal { font-weight: 400; }
+
+    /* ============================================
+       PIXEL HARVEST BORDER (top of every slide)
+       ============================================ */
+    .pixel-border-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 10px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--pixel-green)  0px,  var(--pixel-green)  10px,
+        var(--pixel-yellow) 10px, var(--pixel-yellow) 20px,
+        var(--pixel-pink)   20px, var(--pixel-pink)   30px,
+        var(--pixel-cyan)   30px, var(--pixel-cyan)   40px,
+        var(--pixel-orange) 40px, var(--pixel-orange) 50px
+      );
+      image-rendering: pixelated;
+    }
+    .pixel-border-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 10px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--pixel-orange) 0px,  var(--pixel-orange) 10px,
+        var(--pixel-cyan)   10px, var(--pixel-cyan)   20px,
+        var(--pixel-pink)   20px, var(--pixel-pink)   30px,
+        var(--pixel-yellow) 30px, var(--pixel-yellow) 40px,
+        var(--pixel-green)  40px, var(--pixel-green)  50px
+      );
+      image-rendering: pixelated;
+    }
+
+    /* ============================================
+       PIXEL ART (pure CSS)
+       ============================================ */
+    .pixel-star {
+      width: 24px; height: 24px; position: absolute;
+      background:
+        linear-gradient(var(--pixel-yellow), var(--pixel-yellow)) 6px 0px / 18px 6px,
+        linear-gradient(var(--pixel-yellow), var(--pixel-yellow)) 0px 6px / 30px 6px,
+        linear-gradient(var(--pixel-yellow), var(--pixel-yellow)) 6px 12px / 18px 6px,
+        linear-gradient(var(--pixel-yellow), var(--pixel-yellow)) 0px 18px / 12px 6px,
+        linear-gradient(var(--pixel-yellow), var(--pixel-yellow)) 18px 18px / 12px 6px;
+      background-repeat: no-repeat;
+      image-rendering: pixelated;
+    }
+    .pixel-star.small { transform: scale(0.6); }
+    .pixel-star.tiny  { transform: scale(0.4); }
+
+    .pixel-heart {
+      width: 32px; height: 28px; position: absolute;
+      background:
+        linear-gradient(var(--pixel-red), var(--pixel-red)) 4px 0px  / 12px 4px,
+        linear-gradient(var(--pixel-red), var(--pixel-red)) 20px 0px / 12px 4px,
+        linear-gradient(var(--pixel-red), var(--pixel-red)) 0px 4px  / 36px 4px,
+        linear-gradient(var(--pixel-red), var(--pixel-red)) 0px 8px  / 36px 4px,
+        linear-gradient(var(--pixel-red), var(--pixel-red)) 4px 12px / 28px 4px,
+        linear-gradient(var(--pixel-red), var(--pixel-red)) 8px 16px / 20px 4px,
+        linear-gradient(var(--pixel-red), var(--pixel-red)) 12px 20px / 12px 4px;
+      background-repeat: no-repeat;
+      image-rendering: pixelated;
+    }
+
+    /* ============================================
+       COMPONENT STYLES
+       ============================================ */
+    .slide-title {
+      font-size: 2em;
+      line-height: 1.1;
+      margin-top: 0.15em;
+    }
+
+    .subtitle {
+      font-family: var(--body-font);
+      font-style: italic;
+      color: var(--muted-sage);
+      font-size: 0.8em;
+      margin-bottom: 0.6em;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    /* Stat / achievement card grid */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .stat-card {
+      background: var(--mid-bg);
+      border: 2.5px solid;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .stat-card .stat-icon { font-size: 1.5em; flex-shrink: 0; }
+    .stat-card .stat-num {
+      font-family: var(--title-font);
+      font-size: 1.3em;
+      font-weight: 700;
+    }
+    .stat-card .stat-label {
+      font-size: 0.65em;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    /* Content cards (competition, tools, etc.) */
+    .card-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .card-row.two-col { grid-template-columns: 1fr 1fr; }
+    .card {
+      background: var(--mid-bg);
+      border: 2px solid;
+      padding: 14px;
+      text-align: center;
+    }
+    .card .card-icon { font-size: 1.6em; margin-bottom: 6px; }
+    .card .card-title {
+      font-family: var(--title-font);
+      font-size: 0.85em;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .card .card-desc {
+      font-size: 0.65em;
+      text-align: left;
+      line-height: 1.45;
+    }
+
+    /* Level badge */
+    .lvl-badge {
+      display: inline-block;
+      padding: 2px 12px;
+      font-family: var(--title-font);
+      font-weight: 700;
+      font-size: 0.7em;
+      margin-bottom: 6px;
+    }
+
+    /* List rows (power-ups, vision items, downsides, brand) */
+    .list-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--mid-bg);
+      border: 1.5px solid;
+      padding: 8px 14px;
+      margin-bottom: 6px;
+      font-size: 0.78em;
+    }
+    .list-row .row-icon { font-size: 1.2em; flex-shrink: 0; }
+
+    /* Two-column layout */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+      margin-top: 10px;
+    }
+    .split .callout {
+      background: var(--mid-bg);
+      border: 2.5px solid var(--pixel-yellow);
+      padding: 18px;
+      text-align: center;
+    }
+    .callout .callout-title {
+      font-family: var(--title-font);
+      font-size: 1em;
+      font-weight: 700;
+      margin: 8px 0;
+    }
+    .callout .callout-body {
+      font-size: 0.72em;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* Venn diagram (CSS circles) */
+    .venn-container {
+      position: relative;
+      width: 280px;
+      height: 250px;
+    }
+    .venn-circle {
+      position: absolute;
+      width: 165px; height: 165px;
+      border-radius: 50%;
+      opacity: 0.55;
+      border: 2.5px solid;
+    }
+    .venn-circle.c1 { top: 0; left: 0; background: #2D5A2F; border-color: var(--pixel-green); }
+    .venn-circle.c2 { top: 0; left: 100px; background: #7A5230; border-color: var(--pixel-pink); }
+    .venn-circle.c3 { top: 82px; left: 50px; background: #3A6050; border-color: var(--pixel-cyan); }
+    .venn-label {
+      position: absolute;
+      font-family: var(--title-font);
+      font-size: 0.6em;
+      font-weight: 700;
+      text-align: center;
+    }
+    .venn-center {
+      position: absolute;
+      top: 78px; left: 82px;
+      font-family: var(--title-font);
+      font-size: 1.2em;
+      font-weight: 700;
+      color: var(--pixel-yellow);
+    }
+
+    /* 2x2 Matrix */
+    .matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 4px;
+      background: var(--mid-bg);
+      border: 2px solid var(--pixel-pink);
+      padding: 8px;
+      width: 100%;
+      max-width: 380px;
+    }
+    .matrix-cell {
+      padding: 14px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82em;
+    }
+    .matrix-cell.highlight {
+      background: #1A3A1A;
+      border: 2.5px solid var(--pixel-green);
+      font-family: var(--title-font);
+      font-size: 1em;
+      font-weight: 700;
+      color: var(--pixel-green);
+    }
+    .matrix-cell.muted { background: #1E2518; color: #6B7055; }
+    .matrix-cell.dim { background: var(--mid-bg); color: var(--muted-sage); border: 1px solid #4A5038; }
+
+    /* Workflow steps */
+    .workflow-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    .step-num {
+      font-family: var(--title-font);
+      font-weight: 700;
+      font-size: 0.8em;
+      color: var(--dark-bg);
+      width: 38px; height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-connector {
+      width: 4px; height: 5px;
+      margin-left: 18px;
+      margin-bottom: 2px;
+    }
+
+    /* Tool card (for AI toolkit) */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .tool-card {
+      background: var(--mid-bg);
+      border: 2px solid;
+      padding: 10px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .tool-card .tool-icon { font-size: 1.3em; flex-shrink: 0; margin-top: 2px; }
+    .tool-card .tool-name {
+      font-family: var(--title-font);
+      font-weight: 700;
+      font-size: 0.8em;
+      margin-bottom: 2px;
+    }
+    .tool-card .tool-desc { font-size: 0.65em; line-height: 1.35; }
+
+    /* Emphasis text helpers */
+    .text-green  { color: var(--pixel-green); }
+    .text-yellow { color: var(--pixel-yellow); }
+    .text-pink   { color: var(--pixel-pink); }
+    .text-cyan   { color: var(--pixel-cyan); }
+    .text-orange { color: var(--pixel-orange); }
+    .text-red    { color: var(--pixel-red); }
+    .text-muted  { color: var(--muted-sage); }
+
+    .border-green  { border-color: var(--pixel-green); }
+    .border-yellow { border-color: var(--pixel-yellow); }
+    .border-pink   { border-color: var(--pixel-pink); }
+    .border-cyan   { border-color: var(--pixel-cyan); }
+    .border-orange { border-color: var(--pixel-orange); }
+    .border-red    { border-color: var(--pixel-red); }
+
+    .bg-green  { background-color: var(--pixel-green); }
+    .bg-yellow { background-color: var(--pixel-yellow); }
+    .bg-pink   { background-color: var(--pixel-pink); }
+    .bg-cyan   { background-color: var(--pixel-cyan); }
+    .bg-orange { background-color: var(--pixel-orange); }
+
+    .bold { font-weight: 700; }
+    .italic { font-style: italic; }
+    .center { text-align: center; }
+
+    /* Closing slide specific */
+    .closing-text {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Image placeholder — to be replaced with real images later */
+    .image-placeholder {
+      background: var(--mid-bg);
+      border: 2px dashed var(--muted-sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted-sage);
+      font-style: italic;
+      font-size: 0.7em;
+      text-align: center;
+      padding: 16px;
+      min-height: 160px;
+      box-sizing: border-box;
+    }
+    .image-placeholder.tall  { min-height: 240px; }
+    .image-placeholder.short { min-height: 110px; }
+
+    /* Bio cards (founders slide) */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .bio-card {
+      background: var(--mid-bg);
+      border: 2.5px solid;
+      padding: 16px;
+    }
+    .bio-card .bio-name {
+      font-family: var(--title-font);
+      font-weight: 800;
+      font-size: 1em;
+      margin-bottom: 4px;
+    }
+    .bio-card .bio-role {
+      font-size: 0.7em;
+      color: var(--muted-sage);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .bio-card .bio-body { font-size: 0.78em; line-height: 1.5; }
+
+    /* Big number / pull quote */
+    .big-stat {
+      font-family: var(--title-font);
+      font-weight: 800;
+      font-size: 2.4em;
+      line-height: 1;
+    }
+
+    /* Section divider slide */
+    .section-divider {
+      text-align: center;
+      padding-top: 110px;
+    }
+    .section-divider .section-eyebrow {
+      font-family: var(--title-font);
+      font-size: 0.75em;
+      letter-spacing: 4px;
+      color: var(--muted-sage);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    /* Source link styling */
+    .source-link {
+      font-size: 0.62em;
+      color: var(--muted-sage);
+      font-style: italic;
+      margin-top: 8px;
+      word-break: break-all;
+    }
+
+    /* Fragment / animation helpers for Reveal */
+    .reveal .slides section .fragment.fade-up {
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+    .reveal .slides section .fragment.fade-up.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Speaker notes styling (won't appear in presentation) */
+    aside.notes { display: none; }
+  </style>
+</head>
+<body>
+
+
+<div class="reveal">
+<div class="slides">
+
+
+<!-- =============================================
+     SLIDE 1: TITLE
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+  <div class="pixel-border-bottom"></div>
+
+  <div style="text-align: center; padding-top: 80px;">
+    <img src="assets/img/soil_benchmark_logo.png"
+         alt="Soil Benchmark"
+         style="max-height: 70px; margin-bottom: 24px;">
+    <h1 style="font-size: 2.6em; color: var(--pixel-yellow); margin: 0;">DESK-BASED<br>SOIL ASSESSMENTS</h1>
+    <p class="subtitle" style="font-size: 1em; margin-top: 28px;">Dr Ben Butler &middot; 30th April 2026</p>
+  </div>
+
+  <aside class="notes">
+    Welcome &mdash; thanks for having me. Today I'm going to walk through what
+    desk-based soil assessments are, why we built a system to do them, and
+    the geospatial data that makes the whole thing possible.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 2: PART 1 DIVIDER
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+  <div class="pixel-border-bottom"></div>
+
+  <div class="section-divider">
+    <p class="section-eyebrow">Part 1</p>
+    <h1 style="font-size: 2.2em; color: var(--pixel-green); margin: 0;">A BIT ABOUT<br>SOIL BENCHMARK</h1>
+  </div>
+
+  <aside class="notes">
+    First a bit of context on who we are and how we ended up building this.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 3: FOUNDERS
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-green">HOW WE STARTED</h2>
+  <p class="subtitle">Founded in 2022 by Tom and me</p>
+
+  <div style="display: flex; justify-content: center; align-items: center; margin-top: 12px;">
+    <img src="assets/img/ben and tom hat.gif"
+         alt="Ben and Tom"
+         style="max-height: 300px; max-width: 100%; border: 2.5px solid var(--pixel-green);">
+  </div>
+
+  <p style="font-size: 0.8em; margin-top: 16px; text-align: center;">
+    A vague idea that we wanted to do <span class="text-yellow bold">something for soils at scale</span> &mdash;
+    no real clue what.
+  </p>
+
+  <aside class="notes">
+    We founded Soil Benchmark in 2022. I'd been a soil scientist at the James Hutton Institute
+    in Aberdeen for five years. Tom had been working in the biofertiliser side of a company
+    called NovaQ. We had a vague idea of doing something to improve soils at scale &mdash;
+    but it really wasn't clear what that something was.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 4: 8 MONTHS OF WANDERING
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-yellow">EIGHT MONTHS OF WANDERING</h2>
+  <p class="subtitle">Lots of ideas. Nothing that quite stuck.</p>
+
+  <div class="split">
+    <div>
+      <p style="font-size: 0.9em; line-height: 1.6;">
+        We spent roughly <span class="text-yellow bold">8 months</span> trying to figure out
+        what to actually build.
+      </p>
+      <p style="font-size: 0.85em; line-height: 1.6; margin-top: 14px;">
+        Then a new piece of UK government policy landed
+        &mdash; and suddenly there was an ideal soil-related problem for us to solve.
+      </p>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmY0YmI2b3JmdGRyOWZtaDNyZnY5cDlkZDU5cnlhd3VyNGYyaXB3dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/zRzKlsbGr7C0cC4d8K/giphy.gif"
+           alt="Wandering"
+           style="max-width: 100%; max-height: 280px; border: 2.5px solid var(--pixel-yellow);">
+    </div>
+  </div>
+
+  <aside class="notes">
+    For about 8 months we were just trying things, talking to farmers, talking to advisors.
+    Lots of half-ideas. The thing that finally gave us a focus was the introduction of the
+    Sustainable Farming Incentive in England.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 5: SAM1 / SFI CATALYST
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-orange">ENTER SAM1</h2>
+  <p class="subtitle">The Sustainable Farming Incentive action that kicked things off</p>
+
+  <div class="card-row two-col">
+    <div class="card border-orange">
+      <div class="card-icon">💷</div>
+      <div class="card-title text-orange">£6 / hectare</div>
+      <div class="card-desc center">
+        Paid to farms with an up-to-date soil management plan and soil organic matter results.
+      </div>
+    </div>
+    <div class="card border-yellow">
+      <div class="card-icon">📋</div>
+      <div class="card-title text-yellow">+ £95 / year</div>
+      <div class="card-desc center">
+        Flat annual payment, on top.
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size: 0.78em; margin-top: 16px; line-height: 1.5;">
+    Suddenly there was a national-scale incentive to produce soil management
+    plans &mdash; and the price-per-hectare was tight enough that it had to be
+    fast to be worth doing.
+  </p>
+
+  <p class="source-link">
+    <a href="https://www.gov.uk/guidance/how-to-do-the-sfi-actions-for-soils#how-to-assess-soil-produce-a-soil-management-plan-and-test-soil-organic-matter-sam1"
+       target="_blank"
+       rel="noopener"
+       style="color: var(--pixel-cyan); text-decoration: underline;">
+      gov.uk/guidance/how-to-do-the-sfi-actions-for-soils#how-to-assess-soil-produce-a-soil-management-plan-and-test-soil-organic-matter-sam1
+    </a>
+  </p>
+
+  <aside class="notes">
+    SAM1 is the SFI action for assessing soil, producing a soil management plan and testing
+    soil organic matter. Defra pays £6 per hectare plus a £95 flat annual payment.
+    £6/ha sounds small, but at scale it's meaningful &mdash; the catch is that without
+    technology, paying a consultant to do this would eat the payment several times over.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 6: TWO REALISATIONS
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-green">TWO REALISATIONS</h2>
+  <p class="subtitle">After reading the soil management plan requirements</p>
+
+  <div class="list-row border-pink">
+    <div class="row-icon">⏳</div>
+    <div>
+      Doing this <span class="bold">manually</span> would be brutally time-consuming
+      &mdash; £6/ha wouldn't cover a consultant.
+    </div>
+  </div>
+  <div class="list-row border-green">
+    <div class="row-icon">🗺️</div>
+    <div>
+      But <span class="bold">almost every map layer needed</span> to do it digitally
+      already existed.
+    </div>
+  </div>
+
+  <p style="font-size: 0.85em; margin-top: 18px; line-height: 1.5;">
+    So &mdash; we built a system to use that data and make the process
+    <span class="text-yellow bold">quick enough to be worth doing</span>.
+  </p>
+
+  <aside class="notes">
+    Reading through the requirements for a soil management plan, two things became
+    obvious. First, the job would be incredibly time-consuming without technology.
+    Second, almost all the geospatial map layers required to do the job digitally
+    already existed in the UK. Those two together is what convinced us to build.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 7: PART 2 DIVIDER
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+  <div class="pixel-border-bottom"></div>
+
+  <div class="section-divider">
+    <p class="section-eyebrow">Part 2</p>
+    <h1 style="font-size: 2.2em; color: var(--pixel-cyan); margin: 0;">THE DATA BEHIND<br>OUR DESK BASED SOIL ASSESSMENT</h1>
+    <p class="subtitle" style="font-size: 0.95em; margin-top: 18px;">Six layers do most of the work</p>
+  </div>
+
+  <aside class="notes">
+    The system stands on a handful of geospatial datasets. Let's walk through each.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 8: TOPOGRAPHY (LIDAR)
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-green">TOPOGRAPHY</h2>
+  <p class="subtitle">EA national LIDAR composite &mdash; the foundation of the whole system</p>
+
+  <div class="split">
+    <div>
+      <div class="list-row border-green">
+        <div class="row-icon">📐</div>
+        <div>Elevation for <span class="bold">every square metre</span> of England</div>
+      </div>
+      <div class="list-row border-yellow">
+        <div class="row-icon">🍀</div>
+        <div>Released spring 2023 &mdash; just as we started</div>
+      </div>
+      <div class="list-row border-pink">
+        <div class="row-icon">📦</div>
+        <div>A few hundred GB &mdash; we literally posted a hard drive to the EA</div>
+      </div>
+      <div class="list-row border-cyan">
+        <div class="row-icon">🌱</div>
+        <div>So many derived layers come from this one source</div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="assets/img/topography.png"
+           alt="LIDAR topography"
+           style="max-width: 100%; max-height: 280px; border: 2.5px solid var(--pixel-green);">
+    </div>
+  </div>
+
+  <p class="source-link">
+    <a href="https://environment.data.gov.uk/dataset/13787b9a-26a4-4775-8523-806d13af58fc"
+       target="_blank"
+       rel="noopener"
+       style="color: var(--pixel-cyan); text-decoration: underline;">
+      environment.data.gov.uk/dataset/13787b9a-26a4-4775-8523-806d13af58fc
+    </a>
+    &middot; Open Government Licence
+  </p>
+
+  <aside class="notes">
+    Topography is the bedrock. We got incredibly lucky &mdash; in spring 2023, just as we were
+    starting to build, the Environment Agency finished their national LIDAR survey:
+    1m resolution elevation across the whole of England, released under Open Government Licence.
+    The dataset is huge &mdash; a few hundred GB &mdash; so we posted a hard drive to the EA and
+    waited a couple of months for them to upload it and post it back. From this single dataset
+    you derive slope, aspect, flow accumulation, hill-shading &mdash; an enormous amount of what
+    the system needs.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 9: SOIL
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-orange">SOIL</h2>
+  <p class="subtitle">Estimating topsoil texture across the country</p>
+
+  <div class="split">
+    <div>
+      <div class="list-row border-orange">
+        <div class="row-icon">🪨</div>
+        <div><span class="bold">BGS Soil Parent Material</span> model &mdash; what we use today</div>
+      </div>
+      <div class="list-row border-cyan">
+        <div class="row-icon">🆕</div>
+        <div>
+          <span class="bold">LandIS portal</span> now has the National Soil Map of England
+          open-access &mdash; one for v2
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="assets/img/soil_texture.png"
+           alt="Soil texture"
+           style="max-width: 100%; max-height: 280px; border: 2.5px solid var(--pixel-orange);">
+    </div>
+  </div>
+
+  <p class="source-link">
+    <a href="https://www.bgs.ac.uk/datasets/soil-parent-material-model/"
+       target="_blank"
+       rel="noopener"
+       style="color: var(--pixel-cyan); text-decoration: underline;">
+      bgs.ac.uk/datasets/soil-parent-material-model
+    </a>
+    &middot;
+    <a href="https://portal.landis.org.uk/"
+       target="_blank"
+       rel="noopener"
+       style="color: var(--pixel-cyan); text-decoration: underline;">
+      portal.landis.org.uk
+    </a>
+  </p>
+
+  <aside class="notes">
+    For soil we needed something that gave us topsoil texture nationally. We chose the BGS
+    Soil Parent Material model. More recently the LandIS portal has made the National Soil
+    Map of England and other layers open access &mdash; so a future version of the system
+    will lean on that.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 10: WATER
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-cyan">WATER</h2>
+  <p class="subtitle">Down to the field-ditch level</p>
+
+  <div class="split">
+    <div>
+      <div class="list-row border-cyan">
+        <div class="row-icon">💧</div>
+        <div><span class="bold">Ordnance Survey NGD</span> water dataset</div>
+      </div>
+      <div class="list-row border-green">
+        <div class="row-icon">🚜</div>
+        <div>Crucial for the proximity-to-watercourse rules in the plan</div>
+      </div>
+      <div class="list-row border-yellow">
+        <div class="row-icon">✅</div>
+        <div>Has worked well for us for the last few years</div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="assets/img/water.png"
+           alt="Water network"
+           style="max-width: 100%; max-height: 280px; border: 2.5px solid var(--pixel-cyan);">
+    </div>
+  </div>
+
+  <aside class="notes">
+    A soil management plan needs you to define how close a field is to a waterway, including
+    small features like field ditches. The Ordnance Survey NGD water dataset gives us that
+    level of detail and it's worked really well for us over the past few years.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 11: BOREHOLES
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-pink">BOREHOLES</h2>
+  <p class="subtitle">Pollution-risk proxies for groundwater</p>
+
+  <div class="split">
+    <div>
+      <div class="list-row border-pink">
+        <div class="row-icon">🕳️</div>
+        <div><span class="bold">BGS Single Onshore Boreholes Index</span></div>
+      </div>
+      <div class="list-row border-yellow">
+        <div class="row-icon">⚠️</div>
+        <div>Fields near boreholes = potential to pollute water sources</div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="assets/img/boreholes.png"
+           alt="Boreholes"
+           style="max-width: 100%; max-height: 280px; border: 2.5px solid var(--pixel-pink);">
+    </div>
+  </div>
+
+  <p class="source-link">
+    <a href="https://www.bgs.ac.uk/datasets/boreholes-index/"
+       target="_blank"
+       rel="noopener"
+       style="color: var(--pixel-cyan); text-decoration: underline;">
+      bgs.ac.uk/datasets/boreholes-index
+    </a>
+  </p>
+
+  <aside class="notes">
+    Boreholes matter because fields near them represent a route to polluting water sources.
+    The BGS Single Onshore Boreholes Index gives us a national picture of where they are.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 12: SENSITIVE AREAS
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-yellow">SENSITIVE AREAS</h2>
+  <p class="subtitle">NVZ, SSSI, SAC &hellip; and a geospatial gotcha</p>
+
+  <div class="split">
+    <div>
+      <div class="list-row border-yellow">
+        <div class="row-icon">🛡️</div>
+        <div>NVZ, SSSI, SAC and similar designations</div>
+      </div>
+      <div class="list-row border-pink">
+        <div class="row-icon">📏</div>
+        <div>
+          <span class="bold">Edge cases:</span> NVZ boundaries that nip a tiny corner of a field
+          aren't really &ldquo;in&rdquo; the sensitive area
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="assets/img/sensitive_areas.png"
+           alt="Sensitive areas"
+           style="max-width: 100%; max-height: 280px; border: 2.5px solid var(--pixel-yellow);">
+    </div>
+  </div>
+
+  <aside class="notes">
+    Defining whether a field is in some sort of sensitive area &mdash; an NVZ, SSSI, SAC &mdash;
+    is required by the plan. There's a slight gotcha: these polygons are usually drawn along
+    field boundaries, but you'll get tiny edge intersections that don't actually represent
+    the field being inside the sensitive area. We have to handle that explicitly so we don't
+    flag fields that aren't really affected.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 13: SLOPE DIRECTION ARROWS
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-cyan">SLOPE DIRECTION ARROWS</h2>
+  <p class="subtitle">The unsung hero of map interpretation</p>
+
+  <div class="split">
+    <div>
+      <div class="list-row border-cyan">
+        <div class="row-icon">↘️</div>
+        <div>Tiny arrows showing which way water actually flows</div>
+      </div>
+      <div class="list-row border-yellow">
+        <div class="row-icon">👀</div>
+        <div>Reading a slope map without them is way harder than it sounds</div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="assets/img/slope_direction_arrows.png"
+           alt="Slope direction arrows"
+           style="max-width: 100%; max-height: 280px; border: 2.5px solid var(--pixel-cyan);">
+    </div>
+  </div>
+
+  <aside class="notes">
+    Worth calling out &mdash; slope direction arrows derived from the LIDAR DTM.
+    They're a small thing but they make the difference between a map being abstract and a
+    map being immediately readable when you're trying to interpret runoff or pollution risk.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 14: PART 3 DIVIDER &mdash; KEY RISK LAYERS
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+  <div class="pixel-border-bottom"></div>
+
+  <div class="section-divider">
+    <p class="section-eyebrow">Part 3</p>
+    <h1 style="font-size: 2.2em; color: var(--pixel-pink); margin: 0;">KEY RISK<br>LAYERS</h1>
+    <p class="subtitle" style="font-size: 0.95em; margin-top: 18px;">
+      The four risk layers a soil management plan needs
+    </p>
+  </div>
+
+  <aside class="notes">
+    Once you've got the underlying data, the soil management plan is really driven by
+    a handful of derived risk layers. The big four are run-off, water erosion, wind
+    erosion and nitrate leaching &mdash; let's go through each.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 15: RUN-OFF RISK
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-cyan">RUN-OFF RISK</h2>
+  <p class="subtitle">Where water leaves the field</p>
+
+  <div style="display: flex; justify-content: center; align-items: center; margin-top: 18px;">
+    <div class="image-placeholder tall" style="width: 100%;">
+      [Image placeholder &mdash; run-off risk map]
+    </div>
+  </div>
+
+  <aside class="notes">
+    Run-off risk &mdash; speaker notes to come.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 16: WATER EROSION RISK
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-orange">WATER EROSION RISK</h2>
+  <p class="subtitle">Where soil is most likely to wash off</p>
+
+  <div style="display: flex; justify-content: center; align-items: center; margin-top: 18px;">
+    <div class="image-placeholder tall" style="width: 100%;">
+      [Image placeholder &mdash; water erosion risk map]
+    </div>
+  </div>
+
+  <aside class="notes">
+    Water erosion risk &mdash; speaker notes to come.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 17: WIND EROSION RISK
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-yellow">WIND EROSION RISK</h2>
+  <p class="subtitle">Where soil is most likely to blow away</p>
+
+  <div style="display: flex; justify-content: center; align-items: center; margin-top: 18px;">
+    <div class="image-placeholder tall" style="width: 100%;">
+      [Image placeholder &mdash; wind erosion risk map]
+    </div>
+  </div>
+
+  <aside class="notes">
+    Wind erosion risk &mdash; speaker notes to come.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 18: NITRATE LEACHING RISK
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-green">NITRATE LEACHING RISK</h2>
+  <p class="subtitle">Where nitrogen is most likely to move down through the profile</p>
+
+  <div style="display: flex; justify-content: center; align-items: center; margin-top: 18px;">
+    <div class="image-placeholder tall" style="width: 100%;">
+      [Image placeholder &mdash; nitrate leaching risk map]
+    </div>
+  </div>
+
+  <aside class="notes">
+    Nitrate leaching risk &mdash; speaker notes to come.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 19: CLOSING
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+  <div class="pixel-border-bottom"></div>
+
+  <div class="closing-text" style="padding-top: 100px;">
+    <h1 style="font-size: 2.2em; color: var(--pixel-yellow); margin: 10px 0;">QUESTIONS?</h1>
+    <p style="font-size: 0.85em; line-height: 1.7; margin-top: 24px;">
+      Happy to dig into any of the data sources, the SFI side of things,
+      or how the system actually puts a plan together.
+    </p>
+    <p class="subtitle" style="margin-top: 28px;">Soil Benchmark</p>
+  </div>
+
+  <aside class="notes">
+    Open the floor &mdash; happy to take questions on any of the datasets, the SFI policy
+    side, or how the system pulls a soil management plan together end-to-end.
+  </aside>
+</section>
+
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<!-- Reveal.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    width: 960,
+    height: 540,
+    margin: 0,
+    minScale: 0.2,
+    maxScale: 2.0,
+    transition: 'slide',
+    transitionSpeed: 'default',
+    backgroundTransition: 'fade',
+    controls: true,
+    progress: true,
+    center: true,
+    slideNumber: true,
+  });
+</script>
+
+</body>
+</html>
