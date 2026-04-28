@@ -466,6 +466,28 @@
       word-break: break-all;
     }
 
+    /* Mermaid diagram container */
+    .reveal .mermaid,
+    .reveal pre.mermaid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 6px;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+    .reveal .mermaid svg {
+      max-width: 100%;
+      max-height: 560px;
+      height: auto;
+      box-shadow: none;
+      filter: none;
+    }
+
     /* Fragment / animation helpers for Reveal */
     .reveal .slides section .fragment.fade-up {
       transform: translateY(20px);
@@ -999,6 +1021,7 @@
   <div class="pixel-border-top"></div>
 
   <h2 class="slide-title text-cyan">RUN-OFF RISK</h2>
+  <p class="subtitle">Computed from slope</p>
   <div class="split">
     <div style="display: flex; justify-content: center; align-items: center;">
       <img src="assets/img/run_off_risk.png"
@@ -1036,7 +1059,7 @@
   <div class="pixel-border-top"></div>
 
   <h2 class="slide-title text-orange">WATER EROSION RISK</h2>
-  <p class="subtitle">Where soil is most likely to wash off</p>
+  <p class="subtitle">Computed from slope and soil texture</p>
 
   <div style="display: flex; justify-content: center; align-items: center; margin-top: 18px;">
     <img src="assets/img/water_erosion_risk.png"
@@ -1051,7 +1074,57 @@
 
 
 <!-- =============================================
-     SLIDE 17: WIND EROSION RISK
+     SLIDE 17: WATER EROSION CLASSIFICATION LOGIC
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-orange">CLASSIFYING WATER EROSION RISK</h2>
+
+  <pre class="mermaid">
+flowchart TD
+    H{Texture category}
+    H -->|"SAND, SANDY LOAM,&lt;br/&gt;SILT TO SAND, PEATY SILT,&lt;br/&gt;SAND TO LOAM, etc."| T1[Sandy/light]
+    H -->|"LOAM, SILTY LOAM,&lt;br/&gt;CLAYEY LOAM etc."| T2[Medium]
+    H -->|"CHALKY SILTY LOAM,&lt;br/&gt;CHALKY SANDY LOAM,&lt;br/&gt;CHALKY CLAY variants,&lt;br/&gt;LOCALLY CHALKY"| T3[Calcareous]
+    H -->|"CLAY variants,&lt;br/&gt;PEATY CLAY,&lt;br/&gt;CLAY TO LOAM/SILT"| T4[Heavy]
+
+    T1 --> K{Slope}
+    T2 --> K
+    T3 --> K
+    T4 --> K
+
+    K --> M{"Lookup erosion_risk by&lt;br/&gt;texture × slope"}
+
+    M -->|"Sandy/light + flat ≤0°"| R1[Low Risk]
+    M -->|"Sandy/light + 0-3°"| R2[Moderate Risk]
+    M -->|"Sandy/light + 3-7°"| R3[High Risk]
+    M -->|"Sandy/light + 7-11° or &gt;11°"| R4[Very High Risk]
+
+    M -->|"Medium + flat ≤0° or 0-3°"| R1
+    M -->|"Medium + 3-7°"| R2
+    M -->|"Medium + 7-11° or &gt;11°"| R3
+
+    M -->|"Calcareous + flat ≤0° or 0-3°"| R1
+    M -->|"Calcareous + 3-7°"| R2
+    M -->|"Calcareous + 7-11° or &gt;11°"| R3
+
+    M -->|"Heavy + flat ≤0°, 0-3° or 3-7°"| R1
+    M -->|"Heavy + 7-11° or &gt;11°"| R2
+  </pre>
+
+  <aside class="notes">
+    Walk through the logic: we pull the slope class from the run-off risk layer,
+    join it with BGS soil texture, collapse texture into four broad categories
+    (Sandy/light, Medium, Calcareous, Heavy), then look up the erosion-risk
+    class on a texture &times; slope grid. The output is a four-level ordered
+    factor: Low &rarr; Moderate &rarr; High &rarr; Very High.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 18: WIND EROSION RISK
      ============================================= -->
 <section data-background-color="var(--dark-bg)">
   <div class="pixel-border-top"></div>
@@ -1072,7 +1145,7 @@
 
 
 <!-- =============================================
-     SLIDE 18: NITRATE LEACHING RISK
+     SLIDE 19: NITRATE LEACHING RISK
      ============================================= -->
 <section data-background-color="var(--dark-bg)">
   <div class="pixel-border-top"></div>
@@ -1093,7 +1166,7 @@
 
 
 <!-- =============================================
-     SLIDE 19: CLOSING
+     SLIDE 20: CLOSING
      ============================================= -->
 <section data-background-color="var(--dark-bg)">
   <div class="pixel-border-top"></div>
@@ -1117,6 +1190,17 @@
 
 </div><!-- /slides -->
 </div><!-- /reveal -->
+
+<!-- Mermaid (must load before Reveal so diagrams render into the DOM) -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, useMaxWidth: true }
+  });
+</script>
 
 <!-- Reveal.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
