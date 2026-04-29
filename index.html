@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Desk-Based Soil Assessments — Soil Benchmark</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
   <!-- Reveal.js from CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
@@ -1132,9 +1133,34 @@ flowchart TD
   <h2 class="slide-title text-yellow">WIND EROSION RISK</h2>
   <p class="subtitle">Where soil is most likely to blow away</p>
 
-  <div style="display: flex; justify-content: center; align-items: center; margin-top: 18px;">
-    <div class="image-placeholder tall" style="width: 100%;">
-      [Image placeholder &mdash; wind erosion risk map]
+  <div class="split">
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="assets/img/wind_erosion_risk.png"
+           alt="Wind erosion risk"
+           style="max-width: 100%; max-height: 320px; border: 2.5px solid var(--pixel-yellow);">
+    </div>
+    <div>
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.7em; background: var(--mid-bg); border: 2.5px solid var(--pixel-yellow);">
+        <thead>
+          <tr style="background: var(--pixel-yellow); color: var(--dark-bg); font-family: var(--title-font); text-transform: uppercase; letter-spacing: 1px;">
+            <th style="padding: 6px 10px; text-align: left;" colspan="2">Risk level</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 6px 10px; border-top: 1px solid #4A5038; white-space: nowrap;"><span class="bold">Low Risk</span></td>
+            <td style="padding: 6px 10px; border-top: 1px solid #4A5038;">cohesive, clay/loam-dominant or settled silt-clay mixes</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 10px; border-top: 1px solid #4A5038; white-space: nowrap;"><span class="bold">Moderate Risk</span></td>
+            <td style="padding: 6px 10px; border-top: 1px solid #4A5038;">chalky variants</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 10px; border-top: 1px solid #4A5038; white-space: nowrap;"><span class="bold">High Risk</span></td>
+            <td style="padding: 6px 10px; border-top: 1px solid #4A5038;">sand-, silt- and peat-dominated textures)</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
@@ -1153,9 +1179,34 @@ flowchart TD
   <h2 class="slide-title text-green">NITRATE LEACHING RISK</h2>
   <p class="subtitle">Where nitrogen is most likely to move down through the profile</p>
 
-  <div style="display: flex; justify-content: center; align-items: center; margin-top: 18px;">
-    <div class="image-placeholder tall" style="width: 100%;">
-      [Image placeholder &mdash; nitrate leaching risk map]
+  <div class="split">
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="assets/img/nitrate_leaching_risk.png"
+           alt="Nitrate leaching risk"
+           style="max-width: 100%; max-height: 320px; border: 2.5px solid var(--pixel-green);">
+    </div>
+    <div>
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.7em; background: var(--mid-bg); border: 2.5px solid var(--pixel-green);">
+        <thead>
+          <tr style="background: var(--pixel-green); color: var(--dark-bg); font-family: var(--title-font); text-transform: uppercase; letter-spacing: 1px;">
+            <th style="padding: 6px 10px; text-align: left;"></th>
+            <th style="padding: 6px 10px; text-align: left;">Shallow</th>
+            <th style="padding: 6px 10px; text-align: left;">Not shallow</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 6px 10px; border-top: 1px solid #4A5038;"><span class="bold">Light sandy soils</span></td>
+            <td style="padding: 6px 10px; border-top: 1px solid #4A5038;">At risk</td>
+            <td style="padding: 6px 10px; border-top: 1px solid #4A5038;">At risk</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 10px; border-top: 1px solid #4A5038;"><span class="bold">All other soils</span></td>
+            <td style="padding: 6px 10px; border-top: 1px solid #4A5038;">At risk</td>
+            <td style="padding: 6px 10px; border-top: 1px solid #4A5038;">Not at risk</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
@@ -1166,7 +1217,260 @@ flowchart TD
 
 
 <!-- =============================================
-     SLIDE 20: CLOSING
+     SLIDE 20: OTHER COMPUTATIONS
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-pink">OTHER GEOSPATIAL COMPUTATIONS</h2>
+  <p class="subtitle">Proximity-based flags applied to every field</p>
+
+  <div class="split">
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="assets/img/other_computations.png"
+           alt="Other computations"
+           style="max-width: 100%; max-height: 320px; border: 2.5px solid var(--pixel-pink);">
+    </div>
+    <div>
+      <p style="font-size: 0.78em; line-height: 1.5; margin-bottom: 10px;">
+        For each field we also compute&hellip;
+      </p>
+      <div class="list-row border-cyan">
+        <div class="row-icon">💧</div>
+        <div>Within <span class="bold">20 m</span> of a watercourse</div>
+      </div>
+      <div class="list-row border-pink">
+        <div class="row-icon">🕳️</div>
+        <div>Within <span class="bold">50 m</span> of a borehole</div>
+      </div>
+      <div class="list-row border-yellow">
+        <div class="row-icon">🛡️</div>
+        <div>In a <span class="bold">sensitive area</span> (NVZ, SSSI, SAC, &hellip;)</div>
+      </div>
+      <div class="list-row border-green">
+        <div class="row-icon">📐</div>
+        <div><span class="bold">Slope length</span></div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    On top of the four risk layers we run a handful of proximity-based checks on
+    each field: within 20 m of a watercourse, within 50 m of a borehole, or
+    intersecting a sensitive area like an NVZ, SSSI or SAC. These flags feed
+    directly into the soil management plan recommendations.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 21: SPREADING MAPS
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-red">SPREADING MAPS</h2>
+  <p class="subtitle">Where it's safe to apply slurry, manure or fertiliser &mdash; and where it isn't</p>
+
+  <div class="split">
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="assets/img/spreading_maps.png"
+           alt="Spreading map"
+           style="max-width: 100%; max-height: 320px; border: 2.5px solid var(--pixel-red);">
+    </div>
+    <div>
+      <p style="font-size: 0.78em; line-height: 1.5; margin-bottom: 10px;">
+        Built from four input layers&hellip;
+      </p>
+      <div class="list-row border-green">
+        <div class="row-icon">📐</div>
+        <div><span class="bold">Topography</span></div>
+      </div>
+      <div class="list-row border-orange">
+        <div class="row-icon">🪨</div>
+        <div><span class="bold">Soil</span></div>
+      </div>
+      <div class="list-row border-pink">
+        <div class="row-icon">🕳️</div>
+        <div><span class="bold">Boreholes</span></div>
+      </div>
+      <div class="list-row border-cyan">
+        <div class="row-icon">💧</div>
+        <div><span class="bold">Water</span></div>
+      </div>
+
+      <p style="font-size: 0.72em; margin-top: 14px; line-height: 1.4;">
+        Output: a four-class map &mdash;
+        <span class="text-green bold">green</span>,
+        <span class="text-yellow bold">yellow</span>,
+        <span class="text-orange bold">orange</span>,
+        <span class="text-red bold">red</span>.
+      </p>
+    </div>
+  </div>
+
+  <aside class="notes">
+    Spreading maps are one of the headline outputs of the system. We combine
+    topography, soil, boreholes and water data into a single per-field
+    classification: spread freely, use carefully, avoid, or don't spread at all.
+    The red &ldquo;do not spread&rdquo; zones are typically along watercourses
+    and around boreholes &mdash; you can see the buffers around the borehole
+    and the river in this example.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 22: SPREADING MAPS &mdash; HOW IT'S BUILT
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-red">Spreading Map Rules</h2>
+  <p class="subtitle">The red, orange and yellow rules per field</p>
+
+  <pre class="mermaid">
+flowchart TD
+    R1["10m buffer around&lt;br/&gt;water features/links/points"]
+    R2["50m buffer around&lt;br/&gt;Springs"]
+    R3["50m buffer around&lt;br/&gt;boreholes"]
+    R4["Ramsar designation"]
+    R1 --> RED["RED &mdash; Do not spread"]
+    R2 --> RED
+    R3 --> RED
+    R4 --> RED
+
+    O1["Very steep slope&lt;br/&gt;&gt;11°"]
+    O2["Steep slope 7-11°&lt;br/&gt;AND field adjacent to water"]
+    O3["Moderate slope 3-7°&lt;br/&gt;AND Heavy soil&lt;br/&gt;AND field adjacent to water"]
+    O4["SSSI designation"]
+    O1 --> ORANGE["ORANGE &mdash; Avoid spreading in winter / wet"]
+    O2 --> ORANGE
+    O3 --> ORANGE
+    O4 --> ORANGE
+
+    Y1["Slight slope 0-3°&lt;br/&gt;AND Heavy soil&lt;br/&gt;AND field adjacent to water"]
+    Y2["Moderate slope 3-7°&lt;br/&gt;AND Sandy/light soil&lt;br/&gt;AND field adjacent to water"]
+    Y3["Shallow soil depth"]
+    Y4["Field has drains"]
+    Y1 --> YELLOW["YELLOW &mdash; Restrict in winter"]
+    Y2 --> YELLOW
+    Y3 --> YELLOW
+    Y4 --> YELLOW
+
+    %% Invisible rank links to stack the three groups vertically
+    RED ~~~ O1
+    ORANGE ~~~ Y1
+  </pre>
+
+  <aside class="notes">
+    Three colour bands: red is hard exclusions &mdash; buffers around water,
+    springs, boreholes, plus Ramsar. Orange is avoid-in-winter &mdash; very
+    steep slopes, slope-and-water combinations, and SSSI. Yellow is
+    restrict-in-winter &mdash; slope &times; soil &times; water-adjacency
+    combinations, shallow soils, and any field with drains. Anything not
+    flagged stays as the green default.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 23: BEYOND THE MAP LAYERS
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-cyan">BEYOND THE MAP LAYERS</h2>
+
+  <div class="split">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h3 style="font-size: 1em; color: var(--pixel-cyan); margin-bottom: 10px;">PROPOSALS</h3>
+      <img src="assets/img/proposals.png"
+           alt="Proposals"
+           style="max-width: 100%; max-height: 300px; border: 2.5px solid var(--pixel-cyan);">
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <h3 style="font-size: 1em; color: var(--pixel-cyan); margin-bottom: 10px;">REPORTS</h3>
+      <img src="assets/img/report.png"
+           alt="Report"
+           style="max-width: 100%; max-height: 300px; border: 2.5px solid var(--pixel-cyan);">
+    </div>
+  </div>
+
+  <aside class="notes">
+    Speaker notes &mdash; to come.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 24: SOIL ANALYSIS UPLOAD
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-green">SOIL ANALYSIS UPLOAD</h2>
+
+  <div style="display: flex; justify-content: center; align-items: center; margin-top: 18px;">
+    <img src="assets/img/soil_analysis.png"
+         alt="Soil analysis upload"
+         style="max-width: 100%; max-height: 360px; border: 2.5px solid var(--pixel-green);">
+  </div>
+
+  <aside class="notes">
+    Speaker notes &mdash; to come.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 25: OUR PROGRESS
+     ============================================= -->
+<section data-background-color="var(--dark-bg)">
+  <div class="pixel-border-top"></div>
+
+  <h2 class="slide-title text-yellow">OUR PROGRESS</h2>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 24px; text-align: center;">
+    <div>
+      <div class="big-stat text-green">1,255,715</div>
+      <div style="font-size: 0.78em; margin-top: 10px; font-weight: 700;">
+        Hectares of land using Soil Benchmark
+      </div>
+    </div>
+    <div>
+      <div class="big-stat text-green">5,334</div>
+      <div style="font-size: 0.78em; margin-top: 10px; font-weight: 700;">
+        Soil Management Plans created
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 32px; background: var(--mid-bg); border: 2.5px solid var(--pixel-red); border-left-width: 8px; padding: 14px 18px;">
+    <div style="display: flex; align-items: flex-start; gap: 12px;">
+      <div style="font-size: 1.4em; flex-shrink: 0;">⚠️</div>
+      <div style="font-size: 0.78em; line-height: 1.5;">
+        <span class="text-red bold" style="text-transform: uppercase; letter-spacing: 1px; font-size: 0.85em;">Heads up</span><br>
+        Soil Management Plans are <span class="bold">no longer part of SFI</span> &mdash;
+        so we're expanding the platform into
+        <span class="text-yellow bold">Nutrient Management</span> and
+        <span class="text-yellow bold">Spray Recommendations</span>.
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes">
+    Two headline numbers so far &mdash; over 1.25 million hectares using the
+    platform and just over 5,000 soil management plans created.
+    Worth flagging: SAM1 / soil management plans were dropped from the SFI
+    earlier this year, so we're broadening the platform into nutrient
+    management and spray recommendations to stay relevant for our farms.
+  </aside>
+</section>
+
+
+<!-- =============================================
+     SLIDE 26: CLOSING
      ============================================= -->
 <section data-background-color="var(--dark-bg)">
   <div class="pixel-border-top"></div>
@@ -1174,11 +1478,8 @@ flowchart TD
 
   <div class="closing-text" style="padding-top: 100px;">
     <h1 style="font-size: 2.2em; color: var(--pixel-yellow); margin: 10px 0;">QUESTIONS?</h1>
-    <p style="font-size: 0.85em; line-height: 1.7; margin-top: 24px;">
-      Happy to dig into any of the data sources, the SFI side of things,
-      or how the system actually puts a plan together.
-    </p>
-    <p class="subtitle" style="margin-top: 28px;">Soil Benchmark</p>
+    <p class="subtitle" style="margin-top: 28px;">ben@soilbenchmark.com</p>
+    <p class="subtitle" style="margin-top: 28px;">Give it a go at <a href="https://plan.soilbenchmark.com" target="_blank" rel="noopener" style="color: var(--pixel-cyan); text-decoration: underline;">plan.soilbenchmark.com</a></p>
   </div>
 
   <aside class="notes">
